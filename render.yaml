@@ -7,7 +7,7 @@ services:
     dockerfilePath: ./Dockerfile
     envVars:
       - key: DATABASE_URL
-        value: "postgres://使用者:密碼@主機:5432/資料庫名"
+        value: "postgresql://invidious_db_s63e_user:LYoqbF56Whwf4SBuqSpyDmS5FvS1vpHE@dpg-d230grili9vc73a9d9kg-a/invidious_db_s63e"
       - key: INVIDIOUS_DOMAIN
         value: "your-app-name.onrender.com"
       - key: VISITOR_DATA

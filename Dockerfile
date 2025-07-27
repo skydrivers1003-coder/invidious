@@ -1,4 +1,8 @@
-FROM docker.io/ivorg/invidious:latest
+FROM quay.io/invidious/invidious:latest
 
-# Render 會自動注入 PORT 變數，entrypoint 會處理啟動流程
-# 無需再覆蓋 CMD 或 ENTRYPOINT，保持映像原樣最穩定
+# 安裝依賴並建構 invidious binary
+RUN shards install && \
+    crystal build src/invidious.cr --release
+
+# 啟動指令
+CMD ["./invidious"]
