@@ -31,6 +31,6 @@ services:
 databases:
   - name: invidious-db
     postgresMajorVersion: '14'
-    plan: basic-1gb         # 90 天試用期可用 free；正式用建議 basic-1gb 起跳
+    plan: free         # 90 天試用期可用 free；正式用建議 basic-1gb 起跳
     # ipAllowList: []       # 預設允許所有外網，可依需求縮限
 
