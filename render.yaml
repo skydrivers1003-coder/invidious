@@ -1,36 +1,16 @@
-#################################################################
-#   Invidious on Render · 2025 修正版                         #
-#################################################################
-
 services:
-  # --- 1) Invidious Web (Docker) ------------------------------
-  - name: invidious
-    type: web               # Web Service
-    runtime: docker
+  - type: web
+    name: invidious
+    env: docker
+    plan: free
+    autoDeploy: true
     dockerfilePath: ./Dockerfile
-    plan: free         # 或 starter / pro
-    healthCheckPath: /api/v1/status
     envVars:
-      # 從資料庫抓連線字串
       - key: DATABASE_URL
-        fromDatabase:
-          name: invidious-db
-          property: connectionString
-
-      # 兩組 YouTube BotGuard token（記得在 Render 填值）
-      - key: VISITOR_DATA
-        sync: false         # 首次部署會要求手動填
-      - key: PO_TOKEN
-        sync: false
-
-      # 可留空，之後再改自訂網域
+        value: "postgres://使用者:密碼@主機:5432/資料庫名"
       - key: INVIDIOUS_DOMAIN
-        sync: false
-
-# --- 2) PostgreSQL 14 -----------------------------------------
-databases:
-  - name: invidious-db
-    postgresMajorVersion: '14'
-    plan: free         # 90 天試用期可用 free；正式用建議 basic-1gb 起跳
-    # ipAllowList: []       # 預設允許所有外網，可依需求縮限
-
+        value: "your-app-name.onrender.com"
+      - key: VISITOR_DATA
+        value: "dev"
+      - key: PO_TOKEN
+        value: "dev"
