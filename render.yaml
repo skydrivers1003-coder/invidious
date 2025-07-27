@@ -1,0 +1,30 @@
+services:
+  # ① PostgreSQL 14（Invidious 僅支援 14）
+  - type: postgres
+    name: invidious-db
+    version: 14
+    plan: standard          # 主從或流量大再升級
+    # Render 會自動產生 DATABASE_URL 供引用
+
+  # ② Invidious Web Service
+  - type: web
+    name: invidious
+    env: docker
+    plan: standard
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true         # Git push 後自動重新部署
+    healthCheckPath: /api/v1/status
+    envVars:
+      # 連線字串自動帶入
+      - key: DATABASE_URL
+        fromDatabase:
+          name: invidious-db
+          property: connectionString
+      # 以下三個請在 Blueprint 介面填值
+      - key: VISITOR_DATA
+        value: "填入您產生的 visitor_data"
+      - key: PO_TOKEN
+        value: "填入您產生的 po_token"
+      - key: INVIDIOUS_DOMAIN
+        value: "invidious.example.com"  # 有自訂網域再改，否則可留空
+
