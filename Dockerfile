@@ -7,4 +7,3 @@ RUN chmod +x /start.sh
 USER invidious
 
 CMD ["/start.sh"]
-
