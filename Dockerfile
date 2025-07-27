@@ -7,5 +7,5 @@ RUN chmod +x /start.sh
 
 # Render 會自動注入 $PORT，執行入口在 start.sh
 CMD ["/start.sh"]
-]
+
 
