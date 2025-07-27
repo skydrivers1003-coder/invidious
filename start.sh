@@ -25,5 +25,5 @@ EOF
 export INVIDIOUS_CONFIG="$(cat /tmp/invidious.yaml)"
 
 # 進入程式
-exec invidious
+exec $(which invidious)
 
